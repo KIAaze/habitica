@@ -318,8 +318,9 @@ def cli():
                                                      {}).get('collect'):
                         logging.debug("\tOn a collection type of quest")
                         qt = 'collect'
-                        clct = content['quests'][quest_key][qt].values()[0]
-                        quest_max = clct['count']
+                        quest_max = []
+                        for clct in content['quests'][quest_key][qt].values():
+                          quest_max.append(clct['count'])
                     # else if it's a boss, then hit up
                     # content/quests/<quest_key>/boss/hp
                     elif content.get('quests', {}).get(quest_key,
@@ -339,14 +340,26 @@ def cli():
                 quest_type = cache.get(SECTION_CACHE_QUEST, 'quest_type')
                 if quest_type == 'collect':
                     qp_tmp = quest_data['progress']['collect']
-                    quest_progress = qp_tmp.values()[0]
+                    quest_progress = list(qp_tmp.values()) #[0]
                 else:
                     quest_progress = quest_data['progress']['hp']
 
-                quest = '%s/%s "%s"' % (
-                        str(int(quest_progress)),
-                        cache.get(SECTION_CACHE_QUEST, 'quest_max'),
-                        cache.get(SECTION_CACHE_QUEST, 'quest_title'))
+                if quest_type == 'collect':
+                  quest_max = cache.get(SECTION_CACHE_QUEST, 'quest_max')
+                  quest_max = [int(i) for i in quest_max.strip('[]').split(',')]
+
+                  quest_status = ''
+                  for i,j in enumerate(zip(quest_progress, quest_max)):
+                    if i>0:
+                      quest_status += ', '
+                    s='{}/{}'.format(j[0],j[1])
+                    quest_status += s
+                  quest = '{} "{}"'.format(quest_status, cache.get(SECTION_CACHE_QUEST, 'quest_title'))
+                else:
+                  quest = '{}/{} "{}"'.format(
+                          quest_progress,
+                          cache.get(SECTION_CACHE_QUEST, 'quest_max'),
+                          cache.get(SECTION_CACHE_QUEST, 'quest_title'))
 
         # prepare and print status strings
         title = 'Level %d %s' % (stats['lvl'], stats['class'].capitalize())
