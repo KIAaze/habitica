@@ -15,7 +15,33 @@ I push to pip fairly frequently, but if you'd like to be on the bleeding edge,
 clone this project and install it by hand:
 
     > git clone https://github.com/philadams/habitica
-    > pip install -e habitica
+    > pip install --editable habitica
+
+### Installation in case of externally managed environments
+
+On systems using [externally managed environments](https://packaging.python.org/en/latest/specifications/externally-managed-environments/), you need to create and use a virtual environment.
+
+1. Choose a path for your virtual environment:  
+    `MYVENV=${HOME}/.venv/python3_user/`
+
+1. Create a virtual environment:  
+    `python3 -m venv ${MYVENV}`  
+
+   **Note:** To upgrade it later to a newer python version:  
+   `python3 -m venv --upgrade ${MYVENV}`
+
+1. Change into the cloned repository directory:  
+   `cd habitica`
+   
+1. Install the habitica module:  
+
+    1. As user:  
+      `${MYVENV}/bin/pip3 install .`
+    1. As developer:  
+      `${MYVENV}/bin/pip3 install --editable .`
+
+1. Then to run it:  
+   `${MYVENV}/bin/habitica`
 
 Configure
 ---------
