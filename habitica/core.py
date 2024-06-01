@@ -62,8 +62,8 @@ def load_auth(configfile):
         logging.error("Unable to find '%s'." % configfile)
         exit(1)
 
-    config = configparser.SafeConfigParser({'checklists': False})
-    config.readfp(cf)
+    config = configparser.ConfigParser({'checklists': False})
+    config.read_file(cf)
 
     cf.close()
 
