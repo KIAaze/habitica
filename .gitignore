@@ -8,3 +8,6 @@ build/
 dist/
 files.txt
 *~
+
+# PyCharm files
+.idea
