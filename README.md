@@ -43,6 +43,10 @@ On systems using [externally managed environments](https://packaging.python.org/
 1. Then to run it:  
    `${MYVENV}/bin/habitica`
 
+## Uninstallation
+From outside the repository:  
+`${MYVENV}/bin/pip3 uninstall habitica`
+
 Configure
 ---------
 
