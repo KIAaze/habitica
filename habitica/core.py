@@ -73,7 +73,9 @@ def load_auth(configfile):
         rv = {'url': config.get('Habitica', 'url'),
               'checklists': config.get('Habitica', 'checklists'),
               'x-api-user': config.get('Habitica', 'login'),
-              'x-api-key': config.get('Habitica', 'password')}
+              'x-api-key': config.get('Habitica', 'password'),
+              'x-client': f"{config.get('Habitica', 'login')}-habitica",
+              }
 
     except configparser.NoSectionError:
         logging.error("No 'Habitica' section in '%s'" % configfile)
