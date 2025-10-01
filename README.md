@@ -40,6 +40,10 @@ On systems using [externally managed environments](https://packaging.python.org/
     1. As developer:  
       `${MYVENV}/bin/pip3 install --editable .`
 
+1. Install required packages if missing:
+
+   `${MYVENV}/bin/pip3 install -r requirements.txt`
+
 1. Then to run it:  
    `${MYVENV}/bin/habitica`
 
