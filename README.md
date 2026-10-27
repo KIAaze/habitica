@@ -24,8 +24,14 @@ On systems using [externally managed environments](https://packaging.python.org/
 1. Choose a path for your virtual environment:  
     `MYVENV=${HOME}/.venv/python3_user/`
 
-1. Create a virtual environment:  
-    `python3 -m venv ${MYVENV}`  
+1. Create a virtual environment:
+    * Without giving the virtual environment access to the system site-packages dir:
+
+        `python3 -m venv ${MYVENV}`
+
+    * Giving the virtual environment access to the system site-packages dir:
+
+        `python3 -m venv --system-site-packages ${MYVENV}`
 
    **Note:** To upgrade it later to a newer python version:  
    `python3 -m venv --upgrade ${MYVENV}`
@@ -46,6 +52,10 @@ On systems using [externally managed environments](https://packaging.python.org/
 
 1. Then to run it:  
    `${MYVENV}/bin/habitica`
+
+**Note:** To run things in the virtual environment more easily without `${MYVENV}/bin/` prefix:
+
+`source ${MYVENV}/bin/activate`
 
 ## Uninstallation
 From outside the repository:  
